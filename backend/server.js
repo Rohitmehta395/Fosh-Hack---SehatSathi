@@ -7,13 +7,6 @@ const app = express();
 const port = 4000;
 import 'dotenv/config'
 import reportRouter from "./routes/reportRoute.js";
-
-// req pars to json
-app.use(express.json());
-// to connect backend to different ports 
-
-app.use(express.json());
-import "dotenv/config";
 // req pars to json
 app.use(express.json());
 // to connect backend to different ports
@@ -26,19 +19,10 @@ connectDB();
 app.use('/auth',router);
 // Report Addition
 app.use("/report", reportRouter);
-// for now we have just mounted the folder uploads at /images end point.
+
 app.get('/',(req,res)=>{
     res.send("Hello World");
 })
-
-app.listen(port,()=>{
-    console.log(`Listening at the port ${port}`);
-})
-app.use("/auth", router);
-// for now we have just mounted the folder uploads at /images end point.
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
 
 app.listen(port, () => {
   console.log(`Listening at the port ${port}`);

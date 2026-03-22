@@ -4,27 +4,27 @@ import FilePreview from "../components/sections/Report/FilePreview";
 import AnalyzeAction from "../components/sections/Report/AnalyzeAction";
 import Dropzone from "../components/sections/Report/Dropzone";
 
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+
 const Report = () => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
 
-  //  File select
   const handleFileSelect = (selectedFile) => {
     setFile(selectedFile);
-    setResult(null); // reset old result
+    setResult(null);
     setError(null);
   };
 
-  //  Remove file
   const handleRemoveFile = () => {
     setFile(null);
     setResult(null);
     setError(null);
   };
 
-  // Analyze API call
   const handleAnalyze = async () => {
     if (!file) return;
 
@@ -52,7 +52,6 @@ const Report = () => {
       } else {
         setError(data.message);
       }
-
     } catch (err) {
       setError(err.message || "Something went wrong");
     } finally {
@@ -65,8 +64,7 @@ const Report = () => {
       <div className="max-w-3xl mx-auto">
         <ReportHeader />
 
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 md:p-12">
-          
+        <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 md:p-12 transition-all duration-300">
           {/* Upload Section */}
           {!file ? (
             <Dropzone onFileSelect={handleFileSelect} />
@@ -77,37 +75,37 @@ const Report = () => {
           {/* Analyze Button */}
           <AnalyzeAction file={file} onAnalyze={handleAnalyze} />
 
-          {/* Loading */}
+          {/* Loading Spinner */}
           {loading && (
-            <div className="mt-6 text-center">
-              <p className="text-blue-600 font-medium animate-pulse">
+            <div className="mt-6 flex flex-col items-center justify-center space-y-2">
+              <div className="w-12 h-12 border-4 border-blue-300 border-t-blue-600 rounded-full animate-spin"></div>
+              <p className="text-blue-600 font-medium">
                 🔍 Analyzing your report... please wait
               </p>
             </div>
           )}
 
-          {/* Error */}
+          {/* Error Message */}
           {error && (
             <div className="mt-6 p-4 rounded-lg bg-red-50 border border-red-200 text-center">
-              <p className="text-red-600 font-medium">
-                ⚠️ {error}
-              </p>
+              <p className="text-red-600 font-medium">⚠️ {error}</p>
             </div>
           )}
 
-          {/* Result */}
+          {/* Result Display */}
           {result && (
-            <div className="mt-6 p-5 border rounded-xl bg-green-50 border-green-200">
-              <h3 className="font-bold text-lg mb-3 text-green-700">
+            <div className="mt-6 p-6 border rounded-xl bg-green-50 border-green-200 shadow-sm">
+              <h3 className="font-bold text-lg mb-4 text-green-700 flex items-center gap-2">
                 🧾 Analysis Result
               </h3>
 
-              <div className="text-gray-800 whitespace-pre-line leading-relaxed max-h-96 overflow-y-auto">
-                {result}
+              <div className="prose prose-sm max-w-none text-gray-800 max-h-96 overflow-y-auto">
+                <ReactMarkdown rehypePlugins={[rehypeRaw]}>
+                  {result}
+                </ReactMarkdown>
               </div>
             </div>
           )}
-
         </div>
       </div>
     </div>
