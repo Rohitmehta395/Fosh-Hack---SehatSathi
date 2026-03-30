@@ -4,7 +4,7 @@ import { connectDB } from "./config/db.js";
 import bodyParser from "body-parser";
 import router from "./routes/AuthRoute.js";
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 8000;
 import 'dotenv/config'
 import reportRouter from "./routes/reportRoute.js";
 import historyRouter from "./routes/historyRoute.js";
