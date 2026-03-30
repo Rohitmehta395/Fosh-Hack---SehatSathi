@@ -1,0 +1,4 @@
+@import "tailwindcss";
+.error {
+  color: red;      /* Tailwind red-500 */
+}
