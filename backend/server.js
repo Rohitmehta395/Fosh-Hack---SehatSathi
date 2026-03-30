@@ -5,7 +5,7 @@ import bodyParser from "body-parser";
 import router from "./routes/AuthRoute.js";
 const app = express();
 const port = process.env.PORT || 8000;
-import 'dotenv/config'
+import "dotenv/config";
 import reportRouter from "./routes/reportRoute.js";
 import historyRouter from "./routes/historyRoute.js";
 
@@ -18,14 +18,14 @@ app.use(bodyParser.json());
 // db connection importing the database file
 connectDB();
 // API endpoints
-app.use('/auth', router);
+app.use("/auth", router);
 // Report Analysis
 app.use("/report", reportRouter);
 // History
 app.use("/history", historyRouter);
 
-app.get('/', (req, res) => {
-  res.send("Hello World");
+app.get("/", (req, res) => {
+  res.send("API WORKING FINE");
 });
 
 app.listen(port, () => {
