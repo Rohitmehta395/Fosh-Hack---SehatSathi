@@ -1,1 +1,1 @@
-export const Url = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
+export const Url = "https://sehatsathi-gdjj.onrender.com";
