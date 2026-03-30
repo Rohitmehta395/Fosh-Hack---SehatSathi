@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { LogOut, User } from 'lucide-react';
-import './Header.css';
-import { removeToken, setToken } from '../../redux/Slicers/profileToken.js';
+import { LogOut, User } from "lucide-react";
+import "./Header.css";
+import { removeToken, setToken } from "../../redux/Slicers/profileToken.js";
+
 export default function Header({ setLogin }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -14,19 +15,20 @@ export default function Header({ setLogin }) {
   const navigate = useNavigate();
   const token = useSelector((store) => store.token.token);
   const isLogged = Boolean(token);
-  // Logout
+
   const logout = () => {
     localStorage.removeItem("token");
     dispatch(removeToken());
     console.log("Logout");
-    navigate('/');
-  }
-  // token to local Storage.
+    navigate("/");
+  };
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
       dispatch(setToken(localStorage.getItem("token")));
     }
   }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 20) {
@@ -44,8 +46,9 @@ export default function Header({ setLogin }) {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out ${shouldBeSolid ? "bg-white shadow-md" : "bg-transparent"
-        }`}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out ${
+        shouldBeSolid ? "bg-white shadow-md" : "bg-transparent"
+      }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
@@ -64,53 +67,62 @@ export default function Header({ setLogin }) {
             <nav className="flex space-x-6">
               <a
                 href="/"
-                className={`font-medium transition duration-300 ${!shouldBeSolid
-                  ? "text-gray-900 hover:text-blue-600"
-                  : "text-gray-800 hover:text-blue-600"
-                  }`}
+                className={`font-medium transition duration-300 ${
+                  !shouldBeSolid
+                    ? "text-white hover:text-gray-200"
+                    : "text-gray-800 hover:text-blue-600"
+                }`}
               >
                 Home
               </a>
               <a
                 href="/report"
-                className={`font-medium transition duration-300 ${!shouldBeSolid
-                  ? "text-gray-900 hover:text-blue-600"
-                  : "text-gray-800 hover:text-blue-600"
-                  }`}
+                className={`font-medium transition duration-300 ${
+                  !shouldBeSolid
+                    ? "text-white hover:text-gray-200"
+                    : "text-gray-800 hover:text-blue-600"
+                }`}
               >
                 Report
               </a>
               <a
                 href="/history"
-                className={`font-medium transition duration-300 ${!shouldBeSolid
-                  ? "text-gray-900 hover:text-blue-600"
-                  : "text-gray-800 hover:text-blue-600"
-                  }`}
+                className={`font-medium transition duration-300 ${
+                  !shouldBeSolid
+                    ? "text-white hover:text-gray-200"
+                    : "text-gray-800 hover:text-blue-600"
+                }`}
               >
                 History
               </a>
             </nav>
-            {
-              isLogged ? <div className="navbar-profile">
-                <User className='w-8 h-8 cursor-pointer transition duration-300 hover:text-blue-600' />
+            {isLogged ? (
+              <div className="navbar-profile">
+                <User
+                  className={`w-8 h-8 cursor-pointer transition duration-300 ${!shouldBeSolid ? "text-white hover:text-gray-200" : "text-gray-800 hover:text-blue-600"}`}
+                />
 
-                <ul className='nav-profile-dropdown transition duration-300'>
+                <ul className="nav-profile-dropdown transition duration-300">
                   <li onClick={logout}>
-                    <LogOut className='w-5' />
+                    <LogOut className="w-5" />
                     <p>Logout</p>
                   </li>
                 </ul>
-              </div> : <button onClick={() => setLogin(true)} className="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300 shadow-sm">
+              </div>
+            ) : (
+              <button
+                onClick={() => setLogin(true)}
+                className="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700 transition duration-300 shadow-sm"
+              >
                 Sign in
               </button>
-            }
-
+            )}
           </div>
 
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-800 hover:text-blue-600 focus:outline-none"
+              className={`focus:outline-none transition duration-300 ${!shouldBeSolid ? "text-white" : "text-gray-800 hover:text-blue-600"}`}
               aria-label="Toggle Menu"
             >
               <svg

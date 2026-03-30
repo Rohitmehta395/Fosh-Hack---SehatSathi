@@ -1,4 +1,9 @@
 @import "tailwindcss";
 .error {
-  color: red;      /* Tailwind red-500 */
+  color: red;
+}
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
 }

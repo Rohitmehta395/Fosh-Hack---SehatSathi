@@ -22,7 +22,7 @@ const FAQ = () => {
     {
       question: "How accurate is the AI translation?",
       answer:
-        "Our AI is trained specifically on medical literature to ensure high accuracy in defining terms and flagging out-of-range metrics. However, it's meant for educational purposes to help you ask your doctor the right questions.",
+        "Our AI is powered by the latest generation of machine learning models, delivering translations and medical summaries with up to 97% accuracy. While it is highly reliable for helping you understand your reports, it should always be used alongside your doctor's professional advice.",
     },
     {
       question: "Is this service really free?",

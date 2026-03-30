@@ -1,40 +1,32 @@
 import React from "react";
+import { FileText, X, CheckCircle2 } from "lucide-react";
 
 const FilePreview = ({ file, onRemove }) => {
   if (!file) return null;
 
   return (
-    <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 flex flex-col sm:flex-row items-center justify-between">
-      <div className="flex items-center mb-4 sm:mb-0">
-        <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mr-4 shrink-0">
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-            />
-          </svg>
+    <div className="bg-white border border-slate-200 shadow-sm rounded-2xl p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 transition-all hover:shadow-md animate-in fade-in zoom-in-95">
+      <div className="flex items-center w-full sm:w-auto overflow-hidden">
+        <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center mr-4 shrink-0 relative">
+          <FileText size={28} />
+          <div className="absolute -bottom-1 -right-1 bg-white rounded-full">
+            <CheckCircle2 size={18} className="text-emerald-500" />
+          </div>
         </div>
-        <div className="overflow-hidden text-left">
-          <h4 className="font-semibold text-gray-900 truncate max-w-[200px] md:max-w-xs">
-            {file.name}
-          </h4>
-          <p className="text-sm text-gray-500">
-            {(file.size / 1024 / 1024).toFixed(2)} MB
+
+        <div className="overflow-hidden text-left flex-1 min-w-0">
+          <h4 className="font-bold text-slate-800 truncate">{file.name}</h4>
+          <p className="text-sm text-slate-500 font-medium mt-0.5">
+            {(file.size / 1024 / 1024).toFixed(2)} MB • Ready to analyze
           </p>
         </div>
       </div>
 
       <button
         onClick={onRemove}
-        className="text-red-500 hover:text-red-700 font-medium text-sm transition-colors px-4 py-2 hover:bg-red-50 rounded-lg"
+        className="shrink-0 flex items-center gap-2 text-slate-400 hover:text-red-500 hover:bg-red-50 font-medium text-sm transition-colors px-4 py-2 rounded-xl"
       >
+        <X size={18} />
         Remove
       </button>
     </div>
